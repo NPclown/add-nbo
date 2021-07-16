@@ -6,8 +6,9 @@
 
 ### 실행
 ```
-git clone https://github.com/NPclown/add-nbo.git
-make
+$ git clone https://github.com/NPclown/add-nbo.git
+$ cd add-nbo
+$ make
 ```
 ```
 syntax : add-nbo <file1> <file2>
