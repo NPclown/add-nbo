@@ -2,22 +2,28 @@
 #include <stdint.h>
 #include <netinet/in.h>
 
-int main(int argc, char* argv[]){
-    FILE* f1 = fopen(argv[1], "rb");
-    FILE* f2 = fopen(argv[2], "rb");
+uint32_t readFile(char* fileName){
+    uint32_t result;
+    FILE* f = fopen(fileName, "rb");
 
-    uint32_t t1, t2;
-    uint32_t r1, r2, r3;
-
-    if (f1 == NULL || f2 == NULL){
+    if (f == NULL){
         printf("syntax : add-nbo <file1> <file2>\n");
-    }else{
-        fread(&t1, sizeof(uint32_t), 1, f1);
-        fread(&t2, sizeof(uint32_t), 1, f2);
+        return -1;
+    }
+    
+    fread(&result, sizeof(uint32_t), 1, f);
+    
+    fclose(f);
+    return htonl(result);
+}
 
-        r1 = htonl(t1);
-        r2 = htonl(t2);
-        r3 = r1 + r2;
-        printf("%d(0x%x) + %d(0x%x) = %d(0x%x)\n", r1, r1, r2, r2, r3, r3);
+int main(int argc, char* argv[]){
+
+    uint32_t result_1 = readFile(argv[1]);
+    uint32_t result_2 = readFile(argv[2]);
+    
+    if (result_1 != -1 && result_2 != -1){
+        uint32_t result_3 = result_1 + result_2;
+        printf("%d(0x%x) + %d(0x%x) = %d(0x%x)\n", result_1, result_1, result_2, result_2, result_3, result_3);
     }
 }
