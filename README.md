@@ -24,3 +24,10 @@ $ ./add-nbo thousand.bin five-hundred.bin
 ### Keyword
 - Host Bytes Order
 - Network Bytes Order
+
+
+### Feedback
+- 인자값 개수 체크
+- 파일 없을 경우 체크
+- 3바이트 일 경우, 체크
+- 메인 fuction은 최대한 작게
